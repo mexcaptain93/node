@@ -16,8 +16,11 @@ const read = (filename) => {
 const write = (filename, data) => {
 	return new Promise((success, reject) => {
 		fs.writeFile(filename, data, err => {
-			if (err) return console.log(err);
-			success(filename);
+			if (err) {
+				reject(err);
+			} else {
+				success(filename);
+			}
 		})
 	});
 };

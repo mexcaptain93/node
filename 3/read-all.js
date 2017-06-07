@@ -1,8 +1,8 @@
 const fs = require('fs');
 const filePromise = require('./file-promise');
 
-const temp = [];
 const readAll = (path) => {
+	const temp = [];
 	return new Promise((success, reject) => {
 		fs.readdir(path, (err, files) => {
 			if (err) {
