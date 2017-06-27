@@ -30,7 +30,7 @@ app.post('/post/',
 		if (req.headers.key) {
 			next();
 		} else {
-			res.status(401).send('There is key!');
+			res.status(401).send('There is no key!');
 		}
 	},
 	(req, res) => {
