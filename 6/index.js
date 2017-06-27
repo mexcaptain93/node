@@ -1,6 +1,8 @@
 const express = require('express');
 const app = express();
 
+const port = process.env.PORT || 3000;
+
 const bodyParser = require('body-parser');
 app.use(bodyParser.json());
 app.use(bodyParser.urlencoded({ extended: false }));
@@ -33,12 +35,12 @@ app.post('/post/',
 	},
 	(req, res) => {
 	if (Object.keys(req.body).length == 0) {
-		res.status(404).send('Not found');
-	} else {
 		res.json(req.body);
+	} else {
+		res.status(401).send('Not found');
 	}
 });
 
-app.listen(3000, () => {
-	console.log('Example app listening on port 3000!');
+app.listen(port, () => {
+	console.log(`Listening to ${port} port`);
 });
