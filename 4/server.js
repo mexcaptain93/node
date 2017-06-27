@@ -26,6 +26,7 @@ function getHash(data, res) {
 		});
 		response.on('end', () => {
 			const answer = process(remoteData);
+			res.writeHead(200, 'OK', {'Content-Type': 'text/plain'});
 			res.write(JSON.stringify(answer));
 			res.end();
 		});
@@ -42,7 +43,6 @@ function handler(req, res) {
 	let data = '';
 	req.on('data', chunk => data += chunk);
 	req.on('end', () => {
-		res.writeHead(200, 'OK', {'Content-Type': 'text/plain'});
 		getHash(data, res);
 	});
 }
