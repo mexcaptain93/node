@@ -28,16 +28,16 @@ app.all('/sub/*', (req, res) => {
 app.post('/post/',
 	(req, res, next) => {
 		if (req.headers.key) {
-			res.status(401).send('There is key!');
-		} else {
 			next();
+		} else {
+			res.status(401).send('There is key!');
 		}
 	},
 	(req, res) => {
 	if (Object.keys(req.body).length == 0) {
-		res.json(req.body);
-	} else {
 		res.status(401).send('Not found');
+	} else {
+		res.json(req.body);
 	}
 });
 
