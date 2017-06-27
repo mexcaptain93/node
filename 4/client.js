@@ -12,16 +12,13 @@ const options = {
 	headers: {'Content-Type': 'application/json'}
 };
 
-function process(data) {
-	console.log(JSON.parse(data));
-}
 function handler(response) {
 	let data = '';
 	response.on('data', (chunk) => {
 		data += chunk;
 	});
 	response.on('end', () => {
-		process(data);
+		console.log(JSON.parse(data));
 	});
 }
 
