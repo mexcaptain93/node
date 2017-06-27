@@ -5,7 +5,7 @@ const person = {
 	'lastName': 'Golovanov'
 };
 
-var options = {
+const options = {
 	host: 'localhost',
 	port: 3000,
 	method: 'POST',
@@ -13,20 +13,14 @@ var options = {
 };
 
 function process(data) {
-	// data = JSON.parse(data);
-	// const ans = {
-	// 	firstName: person.Firstname,
-	// 	lastName: person.lastName,
-	// 	secretKey: data.hash
-	// };
 	console.log(JSON.parse(data));
 }
 function handler(response) {
 	let data = '';
-	response.on('data', function(chunk) {
+	response.on('data', (chunk) => {
 		data += chunk;
 	});
-	response.on('end', function() {
+	response.on('end', () => {
 		process(data);
 	});
 }

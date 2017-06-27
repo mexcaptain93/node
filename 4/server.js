@@ -1,7 +1,7 @@
 const http = require('http');
 const port = 3000;
 
-function getHash(data) {
+function getHash(data, res) {
 	const options = {
 		host: 'netology.tomilomark.ru',
 		path: '/api/v1/hash',
@@ -17,15 +17,17 @@ function getHash(data) {
 			lastName: data.lastName,
 			secretKey: remoteData.hash
 		};
-		console.log(ans); // Finish result
+		return ans;
 	}
 	function remoteHandler(response) {
 		let remoteData = '';
-		response.on('data', function(chunk) {
+		response.on('data', (chunk) => {
 			remoteData += chunk;
 		});
-		response.on('end', function() {
-			process(remoteData);
+		response.on('end', () => {
+			const answer = process(remoteData);
+			res.write(JSON.stringify(answer));
+			res.end();
 		});
 	}
 
@@ -41,9 +43,7 @@ function handler(req, res) {
 	req.on('data', chunk => data += chunk);
 	req.on('end', () => {
 		res.writeHead(200, 'OK', {'Content-Type': 'text/plain'});
-		getHash(data);
-		res.write(data);
-		res.end();
+		getHash(data, res);
 	});
 }
 const server = http.createServer();
