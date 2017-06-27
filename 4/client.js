@@ -6,20 +6,20 @@ const person = {
 };
 
 var options = {
-	host: 'netology.tomilomark.ru',
-	path: '/api/v1/hash',
+	host: 'localhost',
+	port: 3000,
 	method: 'POST',
 	headers: {'Content-Type': 'application/json'}
 };
 
 function process(data) {
-	data = JSON.parse(data);
-	const ans = {
-		firstName: person.Firstname,
-		lastName: person.lastName,
-		secretKey: data.hash
-	};
-	console.log(ans);
+	// data = JSON.parse(data);
+	// const ans = {
+	// 	firstName: person.Firstname,
+	// 	lastName: person.lastName,
+	// 	secretKey: data.hash
+	// };
+	console.log(JSON.parse(data));
 }
 function handler(response) {
 	let data = '';
@@ -30,6 +30,7 @@ function handler(response) {
 		process(data);
 	});
 }
+
 const request = http.request(options, handler);
 request.write(JSON.stringify(person));
 request.on('error', (err) => {console.log(err)});
