@@ -16,7 +16,7 @@ pbAPIv1.get('/', (req, res) => {
 	res.send('Phonebook index!');
 });
 
-pbAPIv1.get('/person', (req, result) => {
+pbAPIv1.get('/persons', (req, result) => {
 	MongoClient.connect(url, (err, db) => {
 		if (err) {
 			console.log('Невозможно подключиться к серверу MongoDB. Ошибка:', err);
@@ -30,7 +30,7 @@ pbAPIv1.get('/person', (req, result) => {
 	});
 });
 
-pbAPIv1.get('/person/:id', (req, result) => {
+pbAPIv1.get('/persons/:id', (req, result) => {
 	const id = new ObjectId(req.params.id);
 
 	MongoClient.connect(url, (err, db) => {
@@ -48,14 +48,11 @@ pbAPIv1.get('/person/:id', (req, result) => {
 	});
 });
 
-pbAPIv1.post('/person', (req, result) => {
-	const name = req.body.name;
-	const lastname = req.body.lastname;
-	const phone = req.body.phone;
+pbAPIv1.post('/persons', (req, result) => {
 	const person = {
-		name: name,
-		lastname: lastname,
-		phone: phone
+		name: req.body.name,
+		lastname: req.body.lastname,
+		phone: req.body.phone
 	};
 
 	MongoClient.connect(url, (err, db) => {
@@ -76,18 +73,21 @@ pbAPIv1.post('/person', (req, result) => {
 	});
 });
 
-pbAPIv1.put('/person/:id', (req, result) => {
+pbAPIv1.put('/persons/:id', (req, result) => {
 	const id = new ObjectId(req.params.id);
-	const name = req.body.name;
-	const lastname = req.body.lastname;
-	const phone = req.body.phone;
+
+	const data = {
+		name: req.body.name,
+		lastname: req.body.lastname,
+		phone: req.body.phone
+	}
 
 	MongoClient.connect(url, (err, db) => {
 		if (err) {
 			console.log('Невозможно подключиться к серверу MongoDB. Ошибка:', err);
 		} else {
 			let collection = db.collection('people');
-			collection.update({'_id': id}, {$set: {'name': name, 'lastname': lastname, 'phone': phone}});
+			collection.update({'_id': id}, {$set: data});
 			result.send('ok');
 			result.end();
 			db.close();
@@ -95,7 +95,7 @@ pbAPIv1.put('/person/:id', (req, result) => {
 	});
 });
 
-pbAPIv1.delete('/person/:id', (req, result) => {
+pbAPIv1.delete('/persons/:id', (req, result) => {
 	const id = new ObjectId(req.params.id);
 
 	MongoClient.connect(url, (err, db) => {
