@@ -19,7 +19,7 @@ pbAPIv1.get('/', (req, res) => {
 pbAPIv1.get('/persons', (req, result) => {
 	MongoClient.connect(url, (err, db) => {
 		if (err) {
-			console.log('Невозможно подключиться к серверу MongoDB. Ошибка:', err);
+			result.send('Невозможно подключиться к серверу MongoDB. Ошибка:', err);
 		} else {
 			let collection = db.collection('people');
 			collection.find({}).toArray((err, res) =>  {
@@ -35,13 +35,16 @@ pbAPIv1.get('/persons/:id', (req, result) => {
 
 	MongoClient.connect(url, (err, db) => {
 		if (err) {
-			console.log('Невозможно подключиться к серверу MongoDB. Ошибка:', err);
+			result.send('Невозможно подключиться к серверу MongoDB. Ошибка:', err);
 		} else {
 			let collection = db.collection('people');
 			collection.find({'_id': id}).toArray((err, res) =>  {
-				res.forEach((person) => {
-					result.send(person);
-				});
+				if (res.length == 1) {
+					result.send(res[0]);
+				}
+				else {
+					result.status(404).send('Not found');
+				}
 			});
 		}
 		db.close();
@@ -57,15 +60,14 @@ pbAPIv1.post('/persons', (req, result) => {
 
 	MongoClient.connect(url, (err, db) => {
 		if (err) {
-			console.log('Невозможно подключиться к серверу MongoDB. Ошибка:', err);
+			result.send('Невозможно подключиться к серверу MongoDB. Ошибка:', err);
 		} else {
 			let collection = db.collection('people');
 			collection.insert(person, (err, res) => {
 				if (err) {
-					console.log('Ошибка:', err);
+					result.send('Ошибка:', err);
 				} else {
 					result.send('Person added!');
-					result.end();
 				}
 				db.close();
 			});
@@ -84,12 +86,11 @@ pbAPIv1.put('/persons/:id', (req, result) => {
 
 	MongoClient.connect(url, (err, db) => {
 		if (err) {
-			console.log('Невозможно подключиться к серверу MongoDB. Ошибка:', err);
+			result.send('Невозможно подключиться к серверу MongoDB. Ошибка:', err);
 		} else {
 			let collection = db.collection('people');
 			collection.update({'_id': id}, {$set: data});
 			result.send('ok');
-			result.end();
 			db.close();
 		}
 	});
@@ -100,12 +101,11 @@ pbAPIv1.delete('/persons/:id', (req, result) => {
 
 	MongoClient.connect(url, (err, db) => {
 		if (err) {
-			console.log('Невозможно подключиться к серверу MongoDB. Ошибка:', err);
+			result.send('Невозможно подключиться к серверу MongoDB. Ошибка:', err);
 		} else {
 			let collection = db.collection('people');
 			collection.remove({'_id': id});
 			result.send('deleted');
-			result.end();
 			db.close();
 		}
 	});
@@ -116,7 +116,7 @@ pbAPIv1.get('/search', (req, result) => {
 
 	MongoClient.connect(url, (err, db) => {
 		if (err) {
-			console.log('Невозможно подключиться к серверу MongoDB. Ошибка:', err);
+			result.send('Невозможно подключиться к серверу MongoDB. Ошибка:', err);
 		} else {
 			let collection = db.collection('people');
 			collection.find({ $or: [{'name': q}, {'lastname': q}, {'phone': q}] }).toArray((err, res) =>  {
