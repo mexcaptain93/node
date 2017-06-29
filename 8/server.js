@@ -131,4 +131,4 @@ app.use('/api/v1', pbAPIv1);
 
 app.listen(port, () => {
 	console.log(`Server listening at port ${port}`);
-})
+});
