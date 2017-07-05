@@ -6,7 +6,6 @@ angular.module('myApp', [
     'ngMessages'
 ]).
 config(function($stateProvider) {
-
     $stateProvider
         .state({
             name: 'list',
@@ -31,5 +30,11 @@ config(function($stateProvider) {
             parent: 'detail',
             templateUrl: 'PokemonDetail/PokemonDetailEdit.html',
             controller: function() {}
+        })
+        .state({
+            name: 'myAccount',
+            url: '/myaccount',
+            templateUrl: 'myAccount/myAccount.html',
+			controller: 'myAccountCtrl as vm'
         });
 });

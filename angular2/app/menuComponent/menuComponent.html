@@ -1,0 +1,9 @@
+<div class="panel panel-default">
+    <div class="panel-body">
+
+        <div class="btn-group" role="group">
+            <a ng-repeat="link in links track by $id(link)" data-ui-sref="{{link.link}}" data-ui-sref-active="link-active" class="btn btn-default">{{link.name}}</a>
+        </div>
+
+    </div>
+</div>
