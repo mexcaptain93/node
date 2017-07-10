@@ -11,6 +11,10 @@ module('PokemonApp')
             templateUrl: 'src/PokemonList/PokemonList.html',
             controller: 'PokemonListCtrl'
         }).
+        when('/berries', {
+            templateUrl: 'src/BerriesList/BerriesList.html',
+            controller: 'BerriesListCtrl'
+        }).
         when('/pokemons/:pokemonId', {
             templateUrl: 'src/PokemonDetail/PokemonDetail.html',
             controller: 'PokemonDetailCtrl'
