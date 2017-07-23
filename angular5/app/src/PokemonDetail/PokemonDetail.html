@@ -1,0 +1,12 @@
+<div class="media">
+    <div class="media-left">
+        <img class="media-object" ng-src="{{pokemon.ThumbnailImage}}" alt="{{pokemon.name }}">
+    </div>
+    <div class="media-body">
+        <span class="badge">{{pokemon.id }}</span>
+        <h4 class="media-heading">{{pokemon.name | uppercase }}</h4>
+        <p>Вес:
+            {{pokemon.weight}}, рост:
+            {{pokemon.height}}</p>
+    </div>
+</div>

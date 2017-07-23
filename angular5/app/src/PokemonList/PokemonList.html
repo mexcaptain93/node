@@ -1,0 +1,41 @@
+<div class="panel panel-default">
+    <div class="panel-body">
+
+        Найти:
+        <input ng-model="myQuery"><br><br>
+
+        Сортировать по:
+        <select ng-model="myOrderProperty">
+            <option value="id">ID</option>
+            <option value="weight">Весу</option>
+            <option value="height">Росту</option>
+        </select>
+
+    </div>
+</div>
+
+<div class="list-group">
+    <a href="#/pokemons/{{singlePokemon.id }}" class="list-group-item" ng-repeat="singlePokemon in pokemons | filter:myQuery | orderBy:myOrderProperty">
+        <h4 class="list-group-item-heading">
+            <span class="badge">{{singlePokemon.id }}</span>
+            {{singlePokemon.name | uppercase }}
+        </h4>
+        <p class="list-group-item-text">
+            Вес:
+            {{singlePokemon.weight}}, рост:
+            {{singlePokemon.height}}
+        </p>
+
+    </a>
+</div>
+
+<div class="panel panel-default" ng-show="myQuery">
+    <div class="panel-body">
+
+        <p>
+            Выведены покемоны, содержащие
+            {{myQuery}}
+        </p>
+
+    </div>
+</div>
