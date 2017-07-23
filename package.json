@@ -9,6 +9,9 @@
   "author": "mikhail",
   "license": "ISC",
   "dependencies": {
+    "angular-animate": "^1.6.5",
+    "angular-aria": "^1.6.5",
+    "angular-material": "^1.1.4",
     "body-parser": "^1.17.2",
     "crypto": "0.0.3",
     "events": "^1.1.1",

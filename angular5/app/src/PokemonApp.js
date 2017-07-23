@@ -1,4 +1,4 @@
-var pokemonApp = angular.module('PokemonApp', ['ngRoute']);
+var pokemonApp = angular.module('PokemonApp', ['ngRoute', 'ngMaterial']);
 
 angular.
 module('PokemonApp').

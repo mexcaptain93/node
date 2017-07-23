@@ -14,20 +14,25 @@
     </div>
 </div>
 
-<div class="list-group">
-    <a href="#/pokemons/{{singlePokemon.id }}" class="list-group-item" ng-repeat="singlePokemon in pokemons | filter:myQuery | orderBy:myOrderProperty">
-        <h4 class="list-group-item-heading">
-            <span class="badge">{{singlePokemon.id }}</span>
-            {{singlePokemon.name | uppercase }}
-        </h4>
-        <p class="list-group-item-text">
-            Вес:
-            {{singlePokemon.weight}}, рост:
-            {{singlePokemon.height}}
-        </p>
 
-    </a>
-</div>
+
+
+<md-list>
+    <md-list-item ng-repeat="singlePokemon in pokemons | filter:myQuery | orderBy:myOrderProperty">
+        <a href="#/pokemons/{{singlePokemon.id }}" class="list-group-item">
+            <h4 class="list-group-item-heading">
+                <span class="badge">{{singlePokemon.id }}</span>
+                {{singlePokemon.name | uppercase }}
+            </h4>
+            <p class="list-group-item-text">
+                Вес:
+                {{singlePokemon.weight}}, рост:
+                {{singlePokemon.height}}
+            </p>
+
+        </a>
+    </md-list-item>
+</md-list>
 
 <div class="panel panel-default" ng-show="myQuery">
     <div class="panel-body">
@@ -39,3 +44,4 @@
 
     </div>
 </div>
+
