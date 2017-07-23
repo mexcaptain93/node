@@ -11,8 +11,7 @@ config(['$routeProvider',
             controller: 'PokemonListCtrl'
         }).
         when('/pokemons/:pokemonId', {
-            templateUrl: 'src/PokemonDetail/PokemonDetail.html',
-            controller: 'PokemonDetailCtrl'
+            templateUrl: 'src/PokemonDetail/Pokemon.html'
         }).
         when('/create', {
             templateUrl: 'src/CreatePokemon/CreatePokemon.html',
