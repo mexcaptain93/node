@@ -19,12 +19,26 @@ class PokemonList {
 		console.log(this.list);
 		console.log('Quantity: ' + this.list.length);
 	}
+	max() {
+		let max = 0;
+		let maxPokemon;
+		this.list.forEach((p) => {
+			if (p.level > max) {
+				max = p.level;
+				maxPokemon = p;
+			}
+		});
+		return maxPokemon;
+
+
+	}
+
 }
 
 let pikachu = new Pokemon('Pikachu', 1);
 let bulbasaur = new Pokemon('Bulbasaur', 1);
 let ivisaur = new Pokemon('Ivisaur', 2);
-let charmander = new Pokemon('Charmander', 2);
+let charmander = new Pokemon('Charmander', 8);
 
 let lost = new PokemonList([pikachu, bulbasaur]);
 let found = new PokemonList([ivisaur, charmander]);
@@ -38,14 +52,13 @@ found.add(caterpie);
 lost.show();
 found.show();
 
-
+console.log(lost.max());
 
 let pokemonToMove = lost.list.splice(0,1)[0];
 
 
 found.add(pokemonToMove);
 
-lost.show();
-found.show();
-
-console.log(pikachu.show());
+// lost.show();
+// found.show();
+//

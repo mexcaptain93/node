@@ -27,6 +27,15 @@ describe('Pokemon Tests', () => {
 			// console.log('Quantity: ' + this.list.length);
 			return this.list;
 		}
+		max() {
+			let max = 0;
+			this.list.forEach((pokemon) => {
+				if (pokemon.level > max) {
+					max = pokemon.level;
+				}
+			});
+			return max;
+		}
 	}
 
 	let pikachu = new Pokemon('Pikachu', 1);
@@ -67,6 +76,16 @@ describe('Pokemon Tests', () => {
 	});
 	it('Should show pokemon list', () => {
 		expect(lost.show()).to.be.a('array')
+	});
+
+	it('Should show pokemon with max level', () => {
+		let max = 0;
+		lost.show().forEach((p) => {
+			if (p.level > max) {
+				max = p.level;
+			}
+		});
+		expect(lost.max()).to.equal(max);
 	});
 
 });
